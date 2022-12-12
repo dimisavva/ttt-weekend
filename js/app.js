@@ -16,8 +16,8 @@ const winningCombos = [
 let board, turn, winner, tie //step 1
 
 /*------------------------ Cached Element References ------------------------*/
-const squareEls = document.querySelectorAll(".sqr") //step 2
-const messageEl = document.getElementById("message") //step 2
+const squareEls = document.querySelectorAll('.sqr') //step 2
+const messageEl = document.getElementById('message') //step 2
 const boardEl = document.querySelector('.board')
 const resetBtn = document.getElementById('reset-btn')
 
@@ -81,9 +81,9 @@ updateMessage()
 function updateBoard(){
   board.forEach((boardVal, idx) => {
     if(boardVal === 1){
-    squareEls[idx].textContent = 'x'
+    squareEls[idx].textContent = '❌'
     } else if (boardVal === -1){
-      squareEls[idx].textContent = 'o'
+      squareEls[idx].textContent = '🔴'
     } else {
       squareEls[idx].textContent = ''
     }
@@ -92,11 +92,11 @@ function updateBoard(){
 
 function updateMessage(){
   if (!winner && !tie){
-    messageEl.textContent = `It's ${turn === 1 ? 'x': 'o'}'s turn.`
+    messageEl.textContent = `It's ${turn === 1 ? 'Player ❌': 'Player 🔴'}'s turn.`
   } else if (!winner && tie) {
     messageEl.textContent = `Cat's game, MEOW!`
   } else {
-    messageEl.textContent = `Congrats! ${turn === 1 ? 'x': 'o'} wins!`
+    messageEl.textContent = `Congrats! ${turn === 1 ? 'Player ❌': 'Player 🔴'} wins!`
   }
 }
 
