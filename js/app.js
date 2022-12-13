@@ -23,7 +23,6 @@ const resetBtn = document.getElementById('reset-btn')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-document.querySelector('.board').addEventListener('click', handleClick)
 resetBtn.addEventListener('click', init)
 
 
@@ -38,6 +37,7 @@ function handleClick(evt){
   checkForTie()
   checkForWinner()
   switchPlayerTurn()
+  // celebrate()
   render()
 }
 
@@ -50,27 +50,34 @@ function checkForWinner(){
   })
 }
 
-function switchPlayerTurn(){
-  if (winner) return
-  turn *= -1
-}
-
-function checkForTie(){
-  if (board.includes(null)) return
-  tie = true
-}
-
-function placePiece(sqIdx){
-  board[sqIdx] = turn
-}
-
-//step 3
-function init(){
-  board = [null, null, null, null, null, null, null, null, null]
-  turn = 1
-  winner = false 
-  tie = false
-  render()
+// function celebrate(){
+  //   if (winner === true){
+    //     confetti.start(1000)
+    //   }
+    // }
+    
+    function switchPlayerTurn(){
+      if (winner) return
+      turn *= -1
+    }
+    
+    function checkForTie(){
+      if (board.includes(null)) return
+      tie = true
+    }
+    
+    function placePiece(sqIdx){
+      board[sqIdx] = turn
+    }
+    
+    //step 3
+    function init(){
+      board = [null, null, null, null, null, null, null, null, null]
+      turn = 1
+      winner = false 
+      tie = false
+      document.querySelector('.board').addEventListener('click', handleClick)
+      render()
 }
 
 function render(){
@@ -91,12 +98,15 @@ function updateBoard(){
 }
 
 function updateMessage(){
+  
   if (!winner && !tie){
     messageEl.textContent = `It's ${turn === 1 ? 'Player ❌': 'Player 🔴'}'s turn.`
   } else if (!winner && tie) {
     messageEl.textContent = `Cat's game, MEOW!`
+    boardEl.removeEventListener('click', handleClick)
   } else {
     messageEl.textContent = `Congrats! ${turn === 1 ? 'Player ❌': 'Player 🔴'} wins!`
+    boardEl.removeEventListener('click', handleClick)
   }
 }
 
